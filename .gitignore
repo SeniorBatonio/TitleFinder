@@ -3,3 +3,8 @@
 ################################################################################
 
 /TitleFinder/.vs/TitleFinder
+/TitleFinder/bin/Debug/netcoreapp3.1
+/TitleFinder/obj
+/TitleFinder/wwwroot
+/TitleFinder/Properties
+/TitleFinder/TitleFinder.csproj.user

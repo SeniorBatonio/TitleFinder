@@ -1,0 +1,42 @@
+﻿@page
+@model TitleFinder.Pages.FinderModel
+@{
+}
+
+<table id="urls-table">
+    <tr>
+        <th>URL</th>
+        <th>Title</th>
+        <th>Status</th>
+    </tr>
+    @foreach(var url in Model.Urls)
+    {
+        <tr id="@url">
+            <td>@url</td>
+            <td></td>
+            <td></td>
+        </tr>
+    }
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+    window.onload = function () {
+        var tables = $('#urls-table');
+        for (var i = 1, row; row = tables[0].rows[i]; i++) {
+            $.ajax({
+                url: '@Url.Action("Find", "Finder")',
+                type: 'POST',
+                cache: false,
+                data: { url: row.cells[0].innerHTML },
+                success: function (result, textStatus, xhr) {
+                    var row = document.getElementById(result.url)
+                    row.innerHTML = "<td>" + result.url + "</td>" +
+                                    "<td>" + result.title + "</td>" +
+                                    "<td>" + xhr.status + "</td>";
+                }
+            });
+        }
+    }
+</script>
